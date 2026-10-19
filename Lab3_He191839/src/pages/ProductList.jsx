@@ -1,9 +1,10 @@
 import React, { useMemo } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { products } from '../data/products';
 import SearchBar from '../components/SearchBar';
 import CategoryFiller from '../components/CategoryFiller';
 import Pagination from '../components/Pagination';
+import ProductItem from '../components/ProductItem'; // Import ProductItem vào đây
 
 function ProductList() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -62,19 +63,11 @@ function ProductList() {
         <tbody>
           {displayedProducts.length > 0 ? (
             displayedProducts.map((p) => (
-              <tr key={p.id}>
-                <td>{p.id}</td>
-                <td>{p.name}</td>
-                <td>{p.category}</td>
-                <td>{p.price}</td>
-                <td>
-                  <Link to={`/products/${p.id}`}>View Details</Link>
-                </td>
-              </tr>
+              <ProductItem key={p.id} product={p} />
             ))
           ) : (
             <tr>
-              <td colSpan="5">404-Không tìm thấy sản phẩm!</td>
+              <td colSpan="5">Không tìm thấy sản phẩm!</td>
             </tr>
           )}
         </tbody>
